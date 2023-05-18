@@ -1,5 +1,5 @@
 import click
-import utils
+import constants
 from datetime import date
 import textwrap
 import json
@@ -24,7 +24,7 @@ def to_text(list_kwargs):
             if hasattr(born_date, 'year'):
                 years = now.year - born_date.year
                 click.secho(
-                    f'🎂 {born_date.strftime(utils.DATE_FORMAT)}'
+                    f'🎂 {born_date.strftime(constants.DATE_FORMAT)}'
                     f' if {title} still alive will have {years} '
                     'years',
                     fg='yellow')
@@ -33,7 +33,7 @@ def to_text(list_kwargs):
 
         if dead_date:
             if hasattr(dead_date, 'strftime'):
-                dead_date = dead_date.strftime(utils.DATE_FORMAT)
+                dead_date = dead_date.strftime(constants.DATE_FORMAT)
             click.secho(f'🪦 {dead_date}', fg='bright_black')
 
         if quote:

@@ -16,7 +16,6 @@ for log_name in list_loggers:
     logging.getLogger(log_name).setLevel(logging.CRITICAL)
 
 
-
 def get_date_from_string(date_str):
 
     try:
