@@ -74,8 +74,7 @@ class WikipediaScientistSpider(Spider):
     def _clean(self, txt):
         return re.sub(r'\[\d{0,2}\]', ' ', txt)
 
-    def _get_summary(self):
-
+    def _get_content(self):
         elements = self.drv.find_elements(
             'xpath://*[@id="mw-content-text"]/div/'
             '*[self::p or self::h3/span[@class="mw-headline"]]')
@@ -88,7 +87,7 @@ class WikipediaScientistSpider(Spider):
                 continue
             txt = self._clean(txt)
             summary_list.append(txt)
-        return summary_list[0]
+        return summary_list
 
     def _get_biography_table(self):
         bio_table = self.drv.find_element(
@@ -105,6 +104,6 @@ class WikipediaScientistSpider(Spider):
 
     def parse(self):
         heading = self.drv.find_element('xpath://h1[@id="firstHeading"]').text
-        summary = self._get_summary()
+        page_content = self._get_content()
         biography = self._get_biography_table()
-        return dict(heading=heading, summary=summary, biography=biography)
+        return dict(heading=heading, summary=page_content[0], biography=biography, page_content = page_content)

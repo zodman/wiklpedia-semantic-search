@@ -1,9 +1,7 @@
 import os
 
 SCIENTISTS = [
-    # "Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"
-    'Thales',
-    'Ada Lovelace',
+  "Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"
 ]
 HEADLESS = os.environ.get("HEADLESS")
 
