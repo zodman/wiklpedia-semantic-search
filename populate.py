@@ -19,7 +19,6 @@ def convert_scientificts_to_documents(list_data):
 
 
 def populate(documents):
-
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000,
                                                    chunk_overlap=0)
     documents_splitted = text_splitter.split_documents(documents)

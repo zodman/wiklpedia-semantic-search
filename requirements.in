@@ -4,3 +4,5 @@ python-dateutil
 
 langchain
 pinecone-client
+openai
+tiktoken

@@ -7,6 +7,7 @@ import logging
 import spiders
 import os
 import json
+import populate as base_populate
 
 log = logging.getLogger(__name__)
 
@@ -52,8 +53,8 @@ def run(format, other):
 def populate():
     filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
     data_list = json.loads(open(filename).read())
-    documents = populate.convert_scientificts_to_documents(data_list)
-    populate(documents)
+    documents = base_populate.convert_scientificts_to_documents(data_list)
+    base_populate.populate(documents)
 
 
 if __name__ == "__main__":
