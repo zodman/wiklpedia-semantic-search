@@ -1,6 +1,12 @@
 on:
   - push
 
+env:
+  PINECONE_API_KEY: ${{secrets.PINECONE_API_ENV}}
+  PINECONE_API_ENV: ${{secrets.PINECONE_API_ENV}}
+  OPENAI_API_KEY: ${[secrets.OPENAI_API_KEY}}
+
+
 jobs:
   run:
     runs-on: ubuntu-latest
