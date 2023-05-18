@@ -1,23 +1,14 @@
 from RPA.Browser.Selenium import Selenium
-from dotenv import load_dotenv, find_dotenv
 import random
-
-from dateutil.parser import parse as dparse
+import textwrap
 import os
 import re
 import click
 import logging
-
-logging.basicConfig(level=logging.DEBUG)
-
-for log_name in list(logging.root.manager.loggerDict.keys()) + [
-        'RobotFramework',
-]:
-    logging.getLogger(log_name).setLevel(logging.CRITICAL)
+import utils
 
 log = logging.getLogger(__name__)
 
-load_dotenv(find_dotenv())
 
 HEADLESS = os.environ.get("HEADLESS")
 
@@ -37,7 +28,7 @@ class Spider:
         self.drv.close_browser()
 
     def parse_page(self):
-        log.info(f'parsing')
+        log.info('parsing')
         return self.parse()
 
     def parse(self):
@@ -124,14 +115,23 @@ def crawler():
 def main():
     data = crawler()
     title = data['heading']
-    summary = data['summary']
+    summary = '\n'.join(textwrap.wrap(data['summary']))
     born_txt = data['biography'].get('born')
-    born_date = dparse(born_txt, fuzzy=True).date()
+    born_date = utils.get_date_from_string(born_txt)
+
+    dead_date = None
+    if data['biography'].get('died'):
+        dead_txt = data['biography']['died']
+        dead_date = utils.get_date_from_string(dead_txt)
+
     quote = random.choice(data['quotes']) if data.get('quotes') else None
 
     click.secho(f'{title}', fg='green')
     click.secho(f'{summary}', fg='white')
-    click.secho(f'🎂 {born_date.strftime("%x")}', fg='yellow')
+    if born_date:
+        click.secho(f'🎂 {born_date}', fg='yellow')
+    if dead_date:
+        click.secho(f'🪦 {dead_date}', fg='gray')
     if quote:
         click.secho(f'{quote}', fg='green')
 
