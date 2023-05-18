@@ -192,7 +192,10 @@ pytest==7.3.1
     # via
     #   -r requirements-dev.in
     #   pytest-cov
+    #   pytest-mock
 pytest-cov==4.0.0
+    # via -r requirements-dev.in
+pytest-mock==3.10.0
     # via -r requirements-dev.in
 python-dateutil==2.8.2
     # via
