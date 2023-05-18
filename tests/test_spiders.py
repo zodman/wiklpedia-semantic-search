@@ -71,7 +71,7 @@ def test_spider_wikipedia_summary(mocker):
     element.text.return_value = 'foobar'
     element2 = mocker.MagicMock()
     element.text.return_value = 'foobar'
-    mocker.patch('re.sub', side_effect=['foobar',''])
+    mocker.patch('re.sub', side_effect=['foobar', ''])
 
     mocker.patch('spiders.Spider.drv.find_elements',
                  side_effect=[
@@ -82,20 +82,22 @@ def test_spider_wikipedia_summary(mocker):
     assert r == 'foobar'
 
 
-def test_spider_wikipedia_bbiography(mocker):
+def test_spider_wikipedia_biography(mocker):
     drv_mock = mocker.patch('spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
+    mocker.patch('re.sub', side_effect=['foobar', ''])
 
     element = mocker.MagicMock()
     element.text.return_value = 'foobar'
     element2 = mocker.MagicMock()
     element.text.return_value = 'foobar'
-    mocker.patch('re.sub', side_effect=['foobar',''])
+    mocker.patch('spiders.Spider.drv.find_element', side_effect=element)
 
     mocker.patch('spiders.Spider.drv.find_elements',
                  side_effect=[
                      [element, element2],
+                     [element, element2],
                  ])
     spider = spiders.WikipediaScientistSpider('')
-    r = spider._get_summary()
-    assert r == 'foobar'
+    r = spider._get_biography_table()
+    assert 'foobar' in r.values()
