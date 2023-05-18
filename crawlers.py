@@ -33,10 +33,10 @@ class Scientistic:
         title = data['heading']
         summary = '\n'.join(textwrap.wrap(data['summary']))
         page_content = '\n'.join(data['page_content'])
-        born_txt = data['biography'].get('born')
+        born_txt = data['biography'].get('born', '')
         born_date = utils.get_date_from_string(born_txt)
 
-        dead_date = None
+        dead_date = ''
         if data['biography'].get('died'):
             dead_txt = data['biography']['died']
             if '(aged' in dead_txt:
@@ -50,5 +50,5 @@ class Scientistic:
                     summary=summary,
                     born_date=born_date,
                     dead_date=dead_date,
-                    page_content=page_content ,
+                    page_content=page_content,
                     quote=quote)

@@ -22,8 +22,8 @@ def configure_loggers():
 
 
 def get_date_from_string(date_str):
-    if date_str is None:
-        return None
+    if date_str == '':
+        return ''
 
     def _retry_date(date_txt):
         list_elements = date_txt.split(' ')

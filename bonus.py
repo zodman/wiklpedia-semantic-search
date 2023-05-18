@@ -7,7 +7,6 @@ import constants
 import click
 import textwrap
 import logging
-import utils
 
 log = logging.getLogger(__name__)
 
@@ -18,6 +17,7 @@ def bonus():
         environment=constants.PINECONE_API_ENV,  # next to api key in console
     )
     embeddings = OpenAIEmbeddings(openai_api_key=constants.OPENAI_API_KEY)
+    llm = OpenAI(temperature=0, openai_api_key=constants.OPENAI_API_KEY)
 
     index_name = constants.INDEX_NAME
 
@@ -39,11 +39,8 @@ def bonus():
         if titles:
             print(f'found information in {",".join(titles)} doc')
 
-        llm = OpenAI(temperature=0, openai_api_key=constants.OPENAI_API_KEY)
         chain = load_qa_chain(llm, chain_type="stuff")
-
         answer = chain.run(input_documents=docs, question=query)
-
         click.secho('\n'.join(textwrap.wrap(f'Answer: {answer}')), fg='green')
 
 

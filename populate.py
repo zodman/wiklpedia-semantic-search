@@ -38,8 +38,6 @@ def populate(documents):
 
     index = pinecone.Index(constants.INDEX_NAME)
     index.delete(delete_all=True)
-    for i in documents_splitted:
-        print(i)
-        Pinecone.from_documents([i],
+    Pinecone.from_documents(documents_splitted,
                             embeddings,
                             index_name=constants.INDEX_NAME)
