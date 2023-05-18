@@ -12,8 +12,6 @@ attrs==23.1.0
     #   outcome
     #   trio
     #   zeep
-bake-cli==0.12.0
-    # via -r requirements-dev.in
 beautifulsoup4==4.12.2
     # via
     #   htmldocx
@@ -37,13 +35,12 @@ charset-normalizer==3.1.0
 click==8.1.3
     # via
     #   -r requirements.in
-    #   bake-cli
     #   notifiers
     #   rpaframework
-colorama==0.4.6
-    # via bake-cli
 convertdate==2.4.0
     # via holidays
+coverage[toml]==7.2.5
+    # via pytest-cov
 cryptography==40.0.2
     # via
     #   pdfminer-six
@@ -59,8 +56,6 @@ defusedxml==0.7.1
     # via
     #   exchangelib
     #   fpdf2
-delegator-py==0.1.1
-    # via bake-cli
 dnspython==2.3.0
     # via exchangelib
 docutils==0.20.1
@@ -74,6 +69,8 @@ exceptiongroup==1.1.1
     #   trio-websocket
 exchangelib==4.9.0
     # via rpaframework
+flake8==6.0.0
+    # via -r requirements-dev.in
 fonttools==4.39.4
     # via fpdf2
 fpdf2==2.7.4
@@ -117,12 +114,12 @@ lxml==4.9.2
     #   exchangelib
     #   python-docx
     #   zeep
+mccabe==0.7.0
+    # via flake8
 mss==6.1.0
     # via rpaframework
 netsuitesdk==1.24.0
     # via rpaframework
-networkx==3.1
-    # via bake-cli
 notifiers==1.3.3
     # via rpaframework
 o365==2.0.26
@@ -147,8 +144,6 @@ pdfminer-six==20221105
     # via rpaframework-pdf
 pendulum==2.1.2
     # via rpaframework
-pexpect==4.8.0
-    # via delegator-py
 pillow==9.5.0
     # via
     #   fpdf2
@@ -160,14 +155,14 @@ pluggy==1.0.0
     # via pytest
 ply==3.11
     # via jsonpath-ng
-ptyprocess==0.7.0
-    # via pexpect
+pycodestyle==2.10.0
+    # via flake8
 pycparser==2.21
     # via cffi
+pyflakes==3.0.1
+    # via flake8
 pygments==2.15.1
-    # via
-    #   bake-cli
-    #   exchangelib
+    # via exchangelib
 pyjwt==2.7.0
     # via
     #   rpaframework
@@ -194,9 +189,14 @@ pysocks==1.7.1
 pyspnego==0.9.0
     # via requests-ntlm
 pytest==7.3.1
+    # via
+    #   -r requirements-dev.in
+    #   pytest-cov
+pytest-cov==4.0.0
     # via -r requirements-dev.in
 python-dateutil==2.8.2
     # via
+    #   -r requirements.in
     #   holidays
     #   hubspot-api-client
     #   o365
@@ -310,7 +310,9 @@ stringcase==1.2.0
 tenacity==8.2.2
     # via rpaframework
 tomli==2.0.1
-    # via pytest
+    # via
+    #   coverage
+    #   pytest
 tqdm==4.65.0
     # via webdriver-manager
 trio==0.22.0

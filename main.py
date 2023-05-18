@@ -1,6 +1,7 @@
 import click
 import crawlers
 import utils
+import constants
 import textwrap
 import random
 import re
@@ -37,7 +38,7 @@ class Scientistic:
 @click.command
 @click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
 def main(format):
-    with click.progressbar(utils.SCIENTISTS) as bar:
+    with click.progressbar(constans.SCIENTISTS) as bar:
         data_list = []
         for scient_name in bar:
             data = Scientistic.crawl(scient_name)

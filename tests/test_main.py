@@ -1,11 +1,11 @@
 import pytest
 import crawlers
-import utils
 import main
 import formats
+import constants
 
 
-@pytest.mark.parametrize('name', utils.SCIENTISTS)
+@pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_crawler(name):
     data = crawlers.crawler(name)
     assert 'heading' in data and data['heading'] != ''
@@ -16,7 +16,7 @@ def test_crawler(name):
     assert 'quotes' in data and len(data['quotes']) > 0
 
 
-@pytest.mark.parametrize('name', utils.SCIENTISTS)
+@pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_main_crawl(name):
     data = main.Scientistic.crawl(name)
     assert 'title' in data and data['title'] != ''

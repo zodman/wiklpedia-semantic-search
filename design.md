@@ -37,4 +37,9 @@ Robot
         Spider Search people?
 
 
+TODO:
+    Exception
+    Unittest mocking
+    Monitor execution
+
 
