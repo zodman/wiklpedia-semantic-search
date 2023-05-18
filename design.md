@@ -17,8 +17,8 @@ Robot Navigate to Wikipedia
         https://en.wikipedia.org/wiki/List_of_people_considered_father_or_mother_of_a_scientific_field
     Visit scientiest page
             https://en.wikipedia.org/wiki/Albert_Einstein
-        extract summary
-        born die dates * calculte age
+     [X]   extract summary
+      [X]  born die dates * calculte age
         Display the information
         Scrape some quotes of the scientify
             https://www.brainyquote.com/search_results?x=0&y=0&q=Albert+Eistein
