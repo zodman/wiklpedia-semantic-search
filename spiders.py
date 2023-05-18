@@ -72,7 +72,7 @@ class WikipediaScientistSpider(Spider):
             pass
 
     def _clean(self, txt):
-        return re.sub(r'\[\d{0,2}\]', ' ', txt)
+        return re.sub(r'\[\d{0,4}\]', ' ', txt)
 
     def _get_content(self):
         elements = self.drv.find_elements(
@@ -106,4 +106,7 @@ class WikipediaScientistSpider(Spider):
         heading = self.drv.find_element('xpath://h1[@id="firstHeading"]').text
         page_content = self._get_content()
         biography = self._get_biography_table()
-        return dict(heading=heading, summary=page_content[0], biography=biography, page_content = page_content)
+        return dict(heading=heading,
+                    summary=page_content[0],
+                    biography=biography,
+                    page_content=page_content)

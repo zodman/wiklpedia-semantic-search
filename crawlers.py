@@ -32,6 +32,7 @@ class Scientistic:
         data = crawler(name)
         title = data['heading']
         summary = '\n'.join(textwrap.wrap(data['summary']))
+        page_content = '\n'.join(data['page_content'])
         born_txt = data['biography'].get('born')
         born_date = utils.get_date_from_string(born_txt)
 
@@ -49,4 +50,5 @@ class Scientistic:
                     summary=summary,
                     born_date=born_date,
                     dead_date=dead_date,
+                    page_content=page_content ,
                     quote=quote)
