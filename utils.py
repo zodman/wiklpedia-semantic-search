@@ -5,11 +5,9 @@ log = logging.getLogger(__name__)
 
 
 def configure_loggers():
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format=
-        '%(asctime)s %(name)s %(levelname)s %(filename)s:%(lineno)s  %(message)s'
-    )
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s %(name)s %(levelname)s '
+                        '%(filename)s:%(lineno)s  %(message)s')
     list_loggers = list(logging.root.manager.loggerDict.keys()) + [
         'RobotFramework',
         'openai',
