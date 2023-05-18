@@ -1,10 +1,14 @@
-from spiders import WikipediaSpider, BrainQuotes
+from spiders import WikipediaScientistSpider, BrainQuotes
+import textwrap
+import random
+import re
+import utils
 
 
 def crawler_wikipedia(name):
     name_text = name.replace(" ", "_")
     url = 'https://en.wikipedia.org/wiki/{}'.format(name_text)
-    return WikipediaSpider.run(url)
+    return WikipediaScientistSpider.run(url)
 
 
 def crawler_quotes(name):
@@ -19,3 +23,30 @@ def crawler(name):
         data_tmp = crawler_func(name)
         data.update(data_tmp)
     return data
+
+
+class Scientistic:
+
+    @classmethod
+    def crawl(cls, name):
+        data = crawler(name)
+        title = data['heading']
+        summary = '\n'.join(textwrap.wrap(data['summary']))
+        born_txt = data['biography'].get('born')
+        born_date = utils.get_date_from_string(born_txt)
+
+        dead_date = ''
+        if data['biography'].get('died'):
+            dead_txt = data['biography']['died']
+            if '(aged' in dead_txt:
+                dead_txt = re.sub(r'\(aged.*', '', dead_txt,
+                                  re.MULTILINE | re.DOTALL)
+            dead_date = utils.get_date_from_string(dead_txt)
+
+        quote = random.choice(data['quotes']) if data.get('quotes') else None
+
+        return dict(title=title,
+                    summary=summary,
+                    born_date=born_date,
+                    dead_date=dead_date,
+                    quote=quote)

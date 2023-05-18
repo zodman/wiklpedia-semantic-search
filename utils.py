@@ -19,8 +19,22 @@ for log_name in list_loggers:
 
 def get_date_from_string(date_str):
 
+    def _retry_date(date_str):
+        list_elements = date_str.split(' ')
+        for i in range(len(list_elements)):
+            d = ' '.join(list_elements[i:i + 3])
+            try:
+                return dparse(d, fuzzy=True)
+            except ParserError:
+                continue
+        return date_str
+
     try:
         return dparse(date_str, fuzzy=True).date()
     except ParserError:
         log.error(f'date_str {date_str} not parse')
-        return date_str
+        return _retry_date(date_str)
+
+
+def send_heartbeat():
+    log.info('send notify of success')

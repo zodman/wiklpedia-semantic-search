@@ -53,7 +53,7 @@ class BrainQuotes(Spider):
         return dict(quotes=quotes)
 
 
-class WikipediaSpider(Spider):
+class WikipediaScientistSpider(Spider):
 
     def _clean(self, txt):
         return re.sub(r'\[\d{0,2}\]', ' ', txt)
@@ -64,11 +64,10 @@ class WikipediaSpider(Spider):
             'xpath://*[@id="mw-content-text"]/div/'
             '*[self::p or self::h3/span[@class="mw-headline"]]')
         summary_list = []
-        for i in elements:
-            if i.tag_name == 'h3':
-                txt = f'\n{i.text}\n'
-            else:
-                txt = i.text
+        for node in elements:
+            txt = node.text
+            if node.tag_name == 'h3':
+                txt = f'\n{node.text}\n'
             if txt.strip() == '':
                 continue
             txt = self._clean(txt)

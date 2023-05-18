@@ -1,8 +1,16 @@
 import pytest
 import crawlers
-import main
 import formats
 import constants
+import utils
+from datetime import date
+
+
+def test_date_object():
+    value = utils.get_date_from_string(
+        '"4 January 1643 [O.S. 25 December 1642][a]\nWoolsthorpe-by-Colsterworth, Lincolnshire, England"'
+    )
+    assert isinstance(value, date)
 
 
 @pytest.mark.parametrize('name', constants.SCIENTISTS)
@@ -18,7 +26,7 @@ def test_crawler(name):
 
 @pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_main_crawl(name):
-    data = main.Scientistic.crawl(name)
+    data = crawlers.Scientistic.crawl(name)
     assert 'title' in data and data['title'] != ''
     assert 'summary' in data and data['summary'] != ''
     assert 'born_date' in data
