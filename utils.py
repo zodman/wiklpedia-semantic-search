@@ -1,8 +1,6 @@
 from dateutil.parser import parse as dparse, ParserError
-from dotenv import load_dotenv, find_dotenv
 import logging
 
-load_dotenv(find_dotenv())
 
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)

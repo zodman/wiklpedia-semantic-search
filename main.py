@@ -5,6 +5,8 @@ import constants
 import formats
 import logging
 import spiders
+import os
+import json
 
 log = logging.getLogger(__name__)
 
@@ -44,6 +46,14 @@ def run(format, other):
     else:
         formats.to_text(data_list)
     utils.send_heartbeat()
+
+
+@cli.command
+def populate():
+    filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
+    data_list = json.loads(open(filename).read())
+    documents = populate.convert_scientificts_to_documents(data_list)
+    populate(documents)
 
 
 if __name__ == "__main__":

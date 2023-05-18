@@ -48,10 +48,10 @@ def to_text(list_kwargs):
 
 def to_json(list_kwargs):
     filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
+    prev_content = []
     if os.path.exists(filename):
-        prev_content = json.loads(open(filename).read())
-    else:
-        prev_content = []
+        with open(filename) as file:
+            prev_content = json.loads(file.read())
     content = json.dumps(list_kwargs + prev_content, default=str)
     with open(filename, 'w') as file:
         file.write(content)
