@@ -63,5 +63,39 @@ def test_spider_brainquotes(mocker):
     spider.parse()
 
 
-def test_spider_wikipedia(mocker):
+def test_spider_wikipedia_summary(mocker):
+    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock.open_available_browser.return_value = 1
 
+    element = mocker.MagicMock()
+    element.text.return_value = 'foobar'
+    element2 = mocker.MagicMock()
+    element.text.return_value = 'foobar'
+    mocker.patch('re.sub', side_effect=['foobar',''])
+
+    mocker.patch('spiders.Spider.drv.find_elements',
+                 side_effect=[
+                     [element, element2],
+                 ])
+    spider = spiders.WikipediaScientistSpider('')
+    r = spider._get_summary()
+    assert r == 'foobar'
+
+
+def test_spider_wikipedia_bbiography(mocker):
+    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock.open_available_browser.return_value = 1
+
+    element = mocker.MagicMock()
+    element.text.return_value = 'foobar'
+    element2 = mocker.MagicMock()
+    element.text.return_value = 'foobar'
+    mocker.patch('re.sub', side_effect=['foobar',''])
+
+    mocker.patch('spiders.Spider.drv.find_elements',
+                 side_effect=[
+                     [element, element2],
+                 ])
+    spider = spiders.WikipediaScientistSpider('')
+    r = spider._get_summary()
+    assert r == 'foobar'
