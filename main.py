@@ -4,19 +4,41 @@ import utils
 import constants
 import formats
 import logging
+import spiders
 
 log = logging.getLogger(__name__)
 
 
-@click.command
+def execute_robot(name):
+    click.secho(f'🕷️ Scrapping {name}', fg='green')
+    try:
+        return crawlers.Scientistic.crawl(name)
+    except spiders.SpiderErrorNotFound:
+        click.secho(f'{name} Not Found', fg='red')
+
+
+@click.group
+def cli():
+    pass
+
+
+@cli.command
 @click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
-def main(format):
+@click.option('--other')
+def run(format, other):
     formats.introduction()
     data_list = []
-    for scient_name in constants.SCIENTISTS:
-        click.secho(f'🕷️ Scrapping {scient_name}', fg='green')
-        data = crawlers.Scientistic.crawl(scient_name)
-        data_list.append(data)
+
+    if other:
+        data = execute_robot(other)
+        if data:
+            data_list.append(data)
+    else:
+        for scient_name in constants.SCIENTISTS:
+            data = execute_robot(scient_name)
+            if data:
+                data_list.append(data)
+
     if format == 'json':
         formats.to_json(data_list)
     else:
@@ -25,4 +47,4 @@ def main(format):
 
 
 if __name__ == "__main__":
-    main()
+    cli()

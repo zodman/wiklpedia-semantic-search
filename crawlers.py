@@ -35,7 +35,7 @@ class Scientistic:
         born_txt = data['biography'].get('born')
         born_date = utils.get_date_from_string(born_txt)
 
-        dead_date = ''
+        dead_date = None
         if data['biography'].get('died'):
             dead_txt = data['biography']['died']
             if '(aged' in dead_txt:

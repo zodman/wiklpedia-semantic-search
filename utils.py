@@ -18,16 +18,18 @@ for log_name in list_loggers:
 
 
 def get_date_from_string(date_str):
+    if date_str is None:
+        return None
 
-    def _retry_date(date_str):
-        list_elements = date_str.split(' ')
+    def _retry_date(date_txt):
+        list_elements = date_txt.split(' ')
         for i in range(len(list_elements)):
             d = ' '.join(list_elements[i:i + 3])
             try:
                 return dparse(d, fuzzy=True)
             except ParserError:
                 continue
-        return date_str
+        return date_txt
 
     try:
         return dparse(date_str, fuzzy=True).date()

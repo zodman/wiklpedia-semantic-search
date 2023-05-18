@@ -47,8 +47,9 @@ def to_text(list_kwargs):
 
 
 def to_json(list_kwargs):
-    content = json.dumps(list_kwargs, default=str)
     filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
+    prev_content = json.loads(open(filename).read())
+    content = json.dumps(list_kwargs + prev_content, default=str)
     with open(filename, 'w') as file:
         file.write(content)
     click.secho(f'{filename} file was generated', fg='green')

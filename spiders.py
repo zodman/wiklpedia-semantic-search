@@ -2,11 +2,16 @@ from RPA.Browser.Selenium import Selenium
 import re
 import logging
 import constants
+import SeleniumLibrary.errors
 
 log = logging.getLogger(__name__)
 
 
 class SpiderError(Exception):
+    pass
+
+
+class SpiderErrorNotFound(Exception):
     pass
 
 
@@ -54,6 +59,17 @@ class BrainQuotes(Spider):
 
 
 class WikipediaScientistSpider(Spider):
+
+    def open(self):
+        super().open()
+        text = 'Wikipedia does not have an article with this exact name.'
+        locator = f"xpath://*[contains(., '{text}')]"
+        try:
+            is_present = self.drv.find_element(locator) is not None
+            if is_present:
+                raise SpiderErrorNotFound
+        except SeleniumLibrary.errors.ElementNotFound:
+            pass
 
     def _clean(self, txt):
         return re.sub(r'\[\d{0,2}\]', ' ', txt)
