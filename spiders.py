@@ -50,9 +50,10 @@ class WikipediaSpider(Spider):
         return re.sub(r'\[\d{0,2}\]', ' ', txt)
 
     def _get_summary(self):
+
         elements = self.drv.find_elements(
-            'xpath://*[@id="mw-content-text"]/div/*[self::p or self::h3/span[@class="mw-headline"]]'
-        )
+            'xpath://*[@id="mw-content-text"]/div/'
+            '*[self::p or self::h3/span[@class="mw-headline"]]')
         summary_list = []
         for i in elements:
             if i.tag_name == 'h3':
