@@ -1,20 +1,21 @@
 from spiders import WikipediaSpider, BrainQuotes
 
 
-def crawler_wikipedia():
-    url = 'https://en.wikipedia.org/wiki/Galileo_Galilei'
+def crawler_wikipedia(name):
+    name_text = name.replace(" ", "_")
+    url = 'https://en.wikipedia.org/wiki/{}'.format(name_text)
     return WikipediaSpider.run(url)
 
 
-def crawler_quotes():
-    url = "https://www.brainyquote.com/search_results?x=0&y=0&q=Galileo+Galilei"
+def crawler_quotes(name):
+    url = "https://www.brainyquote.com/search_results?x=0&y=0&q={}".format(
+        name)
     return BrainQuotes.run(url)
 
 
-def crawler():
+def crawler(name):
     data = {}
-    wiki_data = crawler_wikipedia()
-    data.update(wiki_data)
-    quotes_data = crawler_quotes()
-    data.update(quotes_data)
+    for crawler_func in (crawler_wikipedia, crawler_quotes):
+        data_tmp = crawler_func(name)
+        data.update(data_tmp)
     return data

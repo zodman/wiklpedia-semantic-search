@@ -1,11 +1,9 @@
 from RPA.Browser.Selenium import Selenium
-import os
 import re
 import logging
+import utils
 
 log = logging.getLogger(__name__)
-
-HEADLESS = os.environ.get("HEADLESS")
 
 
 class Spider:
@@ -16,7 +14,7 @@ class Spider:
 
     def open(self):
         log.info(f'opening browser {self.url}')
-        self.drv.open_available_browser(self.url, headless=HEADLESS)
+        self.drv.open_available_browser(self.url, headless=utils.HEADLESS)
 
     def close(self):
         log.info(f'closing browser {self.url}')
