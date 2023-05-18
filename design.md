@@ -21,7 +21,7 @@ Robot Navigate to Wikipedia
     [X]  born die dates * calculte age
     [X] Display the information
     [X]    Scrape some quotes of the scientify
-            https://www.brainyquote.com/search_results?x=0&y=0&q=Albert+Eistein
+    [x]        https://www.brainyquote.com/search_results?x=0&y=0&q=Albert+Eistein
 
 
 

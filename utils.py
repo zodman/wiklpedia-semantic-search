@@ -5,10 +5,6 @@ import logging
 
 load_dotenv(find_dotenv())
 
-HEADLESS = os.environ.get("HEADLESS")
-
-DATE_FORMAT = "%-d %B %Y"
-
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
@@ -18,6 +14,13 @@ list_loggers = list(logging.root.manager.loggerDict.keys()) + [
 
 for log_name in list_loggers:
     logging.getLogger(log_name).setLevel(logging.CRITICAL)
+
+SCIENTISTS = [
+    "Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"
+]
+HEADLESS = os.environ.get("HEADLESS")
+
+DATE_FORMAT = "%-d %B %Y"
 
 
 def get_date_from_string(date_str):

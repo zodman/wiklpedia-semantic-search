@@ -6,10 +6,6 @@ import random
 import re
 import formats
 
-SCIENTISTS = [
-    "Albert Einstein", "Isaac Newton", "Marie Curie", "Charles Darwin"
-]
-
 
 class Scientistic:
 
@@ -21,7 +17,7 @@ class Scientistic:
         born_txt = data['biography'].get('born')
         born_date = utils.get_date_from_string(born_txt)
 
-        dead_date = None
+        dead_date = ''
         if data['biography'].get('died'):
             dead_txt = data['biography']['died']
             if '(aged' in dead_txt:
@@ -30,13 +26,26 @@ class Scientistic:
             dead_date = utils.get_date_from_string(dead_txt)
 
         quote = random.choice(data['quotes']) if data.get('quotes') else None
-        formats.to_text(title, summary, born_date, dead_date, quote)
+
+        return dict(title=title,
+                    summary=summary,
+                    born_date=born_date,
+                    dead_date=dead_date,
+                    quote=quote)
 
 
 @click.command
-def main():
-    for scient_name in SCIENTISTS:
-        Scientistic.crawl(scient_name)
+@click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
+def main(format):
+    with click.progressbar(utils.SCIENTISTS) as bar:
+        data_list = []
+        for scient_name in bar:
+            data = Scientistic.crawl(scient_name)
+            data_list.append(data)
+    if format == 'json':
+        formats.to_json(data_list)
+    else:
+        formats.to_text(data_list)
 
 
 if __name__ == "__main__":
