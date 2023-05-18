@@ -8,8 +8,8 @@ from datetime import date
 
 def test_date_object():
     value = utils.get_date_from_string(
-        '"4 January 1643 [O.S. 25 December 1642][a]\nWoolsthorpe-by-Colsterworth, Lincolnshire, England"'
-    )
+        '"4 January 1643 [O.S. 25 December 1642][a]\n'
+        'Woolsthorpe-by-Colsterworth, Lincolnshire, England"')
     assert isinstance(value, date)
 
 

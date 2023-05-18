@@ -2,4 +2,5 @@ import crawlers
 
 
 def test_crawler_brainquotes():
-    data = crawlers.crawler_quotes('My name doest not exists here aleluya')
+    quote = 'My name doest not exists here aleluya'
+    crawlers.crawler_quotes(quote)
