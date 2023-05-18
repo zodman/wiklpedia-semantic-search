@@ -6,6 +6,10 @@ import pinecone
 import constants
 import click
 import textwrap
+import logging
+import utils
+
+log = logging.getLogger(__name__)
 
 
 def bonus():
@@ -16,14 +20,16 @@ def bonus():
     embeddings = OpenAIEmbeddings(openai_api_key=constants.OPENAI_API_KEY)
 
     index_name = constants.INDEX_NAME
-    doc_search = Pinecone.from_existing_index(index_name, embeddings)
 
     click.secho(
         'Implementing Semantic search usin pinecone+langchain\n'
         'ask me Anything about our scientients scrapped',
-        fg='')
+        fg='yellow')
+
     while True:
+        doc_search = Pinecone.from_existing_index(index_name, embeddings)
         query = click.prompt('query > ')
+
         docs = doc_search.similarity_search(query)
 
         titles = set()

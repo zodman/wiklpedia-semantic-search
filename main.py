@@ -1,13 +1,14 @@
+import utils
 import click
 import crawlers
-import utils
 import constants
 import formats
-import logging
 import spiders
 import os
 import json
 import populate as base_populate
+import bonus as base_bonus
+import logging
 
 log = logging.getLogger(__name__)
 
@@ -26,8 +27,11 @@ def cli():
 
 
 @cli.command
-@click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
-@click.option('--other')
+@click.option('--format',
+              type=click.Choice(['txt', 'json']),
+              default='txt',
+              help='output format')
+@click.option('--other', help='Other scientistic name')
 def run(format, other):
     formats.introduction()
     data_list = []
@@ -55,7 +59,14 @@ def populate():
     data_list = json.loads(open(filename).read())
     documents = base_populate.convert_scientificts_to_documents(data_list)
     base_populate.populate(documents)
+    click.secho('finished', fg='green')
+
+
+@cli.command()
+def bonus():
+    base_bonus.bonus()
 
 
 if __name__ == "__main__":
+    utils.configure_loggers()
     cli()

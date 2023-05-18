@@ -90,8 +90,11 @@ class WikipediaScientistSpider(Spider):
         return summary_list
 
     def _get_biography_table(self):
-        bio_table = self.drv.find_element(
-            "xpath://table[contains(@class,'biography')]")
+        try:
+            bio_table = self.drv.find_element(
+                "xpath://table[contains(@class,'biography')]")
+        except SeleniumLibrary.errors.ElementNotFound:
+            return {}
         elements_label = self.drv.find_elements(
             'xpath://tr/th[@class="infobox-label"]', parent=bio_table)
         elements_data = self.drv.find_elements(

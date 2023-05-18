@@ -13,6 +13,17 @@ def test_date_object():
     assert isinstance(value, date)
 
 
+@pytest.mark.parametrize('name', [
+    "Ferdinand Cohn",
+    "William Kirby",
+])
+def test_crawler_others(name):
+    data = crawlers.crawler(name)
+    assert 'heading' in data and data['heading'] != ''
+    assert 'summary' in data and data['summary'] != ''
+    assert 'biography' in data and data['biography'] == {}
+
+
 @pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_crawler(name):
     data = crawlers.crawler(name)

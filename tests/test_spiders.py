@@ -69,8 +69,8 @@ def test_spider_wikipedia_parse(mocker):
 
     mocker.patch('spiders.Spider.drv.find_element',
                  side_effect=[mocker.MagicMock()])
-    mocker.patch('spiders.WikipediaScientistSpider._get_summary',
-                 return_value='foobar')
+    mocker.patch('spiders.WikipediaScientistSpider._get_content',
+                 return_value=['foobar'])
     mocker.patch('spiders.WikipediaScientistSpider._get_biography_table',
                  return_value='foobar2')
     spider = spiders.WikipediaScientistSpider('')
@@ -95,8 +95,8 @@ def test_spider_wikipedia_summary(mocker):
                      [element, element2],
                  ])
     spider = spiders.WikipediaScientistSpider('')
-    r = spider._get_summary()
-    assert r == 'foobar'
+    r = spider._get_content()
+    assert ''.join(r) == 'foobar'
 
 
 def test_spider_wikipedia_biography(mocker):

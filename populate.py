@@ -3,18 +3,24 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 import pinecone
-
 import constants
+import logging
+
+log = logging.getLogger(__name__)
 
 
 def convert_scientificts_to_documents(list_data):
+    title_db = set()
     result_list = []
     for data in list_data:
         tmp_data = data.copy()
         del tmp_data['page_content']
-        doc = Document(page_content=data['page_content'],
-                       metadata={**tmp_data})
-        result_list.append(doc)
+        title = data['title']
+        if title not in title_db:
+            title_db.add(title)
+            doc = Document(page_content=data['page_content'],
+                           metadata={**tmp_data})
+            result_list.append(doc)
     return result_list
 
 
@@ -32,6 +38,8 @@ def populate(documents):
 
     index = pinecone.Index(constants.INDEX_NAME)
     index.delete(delete_all=True)
-    Pinecone.from_documents(documents_splitted,
+    for i in documents_splitted:
+        print(i)
+        Pinecone.from_documents([i],
                             embeddings,
                             index_name=constants.INDEX_NAME)

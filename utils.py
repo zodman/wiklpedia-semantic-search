@@ -1,18 +1,24 @@
 from dateutil.parser import parse as dparse, ParserError
 import logging
 
-
-logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
-list_loggers = list(logging.root.manager.loggerDict.keys()) + [
-    'RobotFramework',
-]
 
-for log_name in list_loggers:
-    if 'spiders' in log_name:
-        continue
-    logging.getLogger(log_name).setLevel(logging.CRITICAL)
+def configure_loggers():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format=
+        '%(asctime)s %(name)s %(levelname)s %(filename)s:%(lineno)s  %(message)s'
+    )
+    list_loggers = list(logging.root.manager.loggerDict.keys()) + [
+        'RobotFramework',
+        'openai',
+    ]
+
+    for log_name in list_loggers:
+        if 'spiders' in log_name:
+            continue
+        logging.getLogger(log_name).setLevel(logging.CRITICAL)
 
 
 def get_date_from_string(date_str):
