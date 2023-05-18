@@ -1,6 +1,6 @@
 
 
-Robot
+The Robot have a 
     name 
     log every step
 
@@ -26,7 +26,7 @@ Robot Navigate to Wikipedia
 
 
 Robot
-    crawl
+    crawler
     Spider
         open browser
         parse_page
@@ -40,7 +40,7 @@ Robot
 TODO:
     [x] github actions && flakes
     [x] Exception
-    Unittest mocking
+    [x] Unittest mocking
     Monitor execution
 
 
