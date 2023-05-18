@@ -56,10 +56,13 @@ def run(format, other):
 @cli.command
 def populate():
     filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
-    data_list = json.loads(open(filename).read())
-    documents = base_populate.convert_scientificts_to_documents(data_list)
-    base_populate.populate(documents)
-    click.secho('finished', fg='green')
+    if os.path.exists(filename):
+        data_list = json.loads(open(filename).read())
+        documents = base_populate.convert_scientificts_to_documents(data_list)
+        base_populate.populate(documents)
+        click.secho('finished', fg='green')
+    else:
+        click.secho('json not exist', fg='red')
 
 
 @cli.command()
