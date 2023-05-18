@@ -1,13 +1,13 @@
-import main
+import crawlers
 
 
 def test_quotes_spider():
-    data = main.crawler_quotes()
+    data = crawlers.crawler_quotes()
     assert 'quotes' in data and len(data['quotes']) > 0
 
 
 def test_wikipedia_spider():
-    data = main.crawler_wikipedia()
+    data = crawlers.crawler_wikipedia()
 
     assert 'heading' in data and data['heading'] != ''
     assert 'summary' in data and data['summary'] != ''
