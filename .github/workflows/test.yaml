@@ -24,7 +24,6 @@ jobs:
       - name: Excute main
         run: |
           python main.py run --format=json
-          python main.py populate
         env:
           HEADLESS: "1"
 
