@@ -18,7 +18,7 @@ jobs:
       - name: Excute tests
         run: pytest
         env: 
-            HEADLESS:1
+            HEADLESS: "1"
   lint:
     runs-on: ubuntu-latest
     steps:
