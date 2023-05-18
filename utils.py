@@ -2,7 +2,6 @@ from dateutil.parser import parse as dparse, ParserError
 from dotenv import load_dotenv, find_dotenv
 import logging
 
-
 load_dotenv(find_dotenv())
 
 logging.basicConfig(level=logging.DEBUG)
@@ -13,6 +12,8 @@ list_loggers = list(logging.root.manager.loggerDict.keys()) + [
 ]
 
 for log_name in list_loggers:
+    if 'spiders' in log_name:
+        continue
     logging.getLogger(log_name).setLevel(logging.CRITICAL)
 
 

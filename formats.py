@@ -51,4 +51,4 @@ def to_json(list_kwargs):
     filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
     with open(filename, 'w') as file:
         file.write(content)
-    click.secho(f'{filename} file was generated')
+    click.secho(f'{filename} file was generated', fg='green')

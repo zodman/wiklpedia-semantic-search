@@ -42,11 +42,11 @@ class Scientistic:
 @click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
 def main(format):
     formats.introduction()
-    with click.progressbar(constants.SCIENTISTS) as bar:
-        data_list = []
-        for scient_name in bar:
-            data = Scientistic.crawl(scient_name)
-            data_list.append(data)
+    data_list = []
+    for scient_name in constants.SCIENTISTS:
+        click.secho(f'🕷️ Scrapping {scient_name}', fg='green')
+        data = Scientistic.crawl(scient_name)
+        data_list.append(data)
     if format == 'json':
         formats.to_json(data_list)
     else:
