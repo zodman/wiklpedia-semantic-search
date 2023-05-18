@@ -38,7 +38,7 @@ Robot
 
 
 TODO:
-    github actions && flakes
+    [x] github actions && flakes
     Exception
     Unittest mocking
     Monitor execution

@@ -6,6 +6,10 @@ import constants
 log = logging.getLogger(__name__)
 
 
+class SpiderError(Exception):
+    pass
+
+
 class Spider:
     drv = Selenium()
 
@@ -14,7 +18,9 @@ class Spider:
 
     def open(self):
         log.info(f'opening browser {self.url}')
-        self.drv.open_available_browser(self.url, headless=constants.HEADLESS)
+        if not self.drv.open_available_browser(self.url,
+                                               headless=constants.HEADLESS):
+            raise SpiderError('Browser cannot open')
 
     def close(self):
         log.info(f'closing browser {self.url}')
@@ -22,7 +28,10 @@ class Spider:
 
     def parse_page(self):
         log.info('parsing')
-        return self.parse()
+        try:
+            return self.parse()
+        except Exception as e:
+            raise SpiderError(e)
 
     def parse(self):
         assert False, 'needs implement'

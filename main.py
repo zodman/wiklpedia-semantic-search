@@ -6,6 +6,9 @@ import textwrap
 import random
 import re
 import formats
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class Scientistic:
@@ -38,6 +41,7 @@ class Scientistic:
 @click.command
 @click.option('--format', type=click.Choice(['txt', 'json']), default='txt')
 def main(format):
+    formats.introduction()
     with click.progressbar(constants.SCIENTISTS) as bar:
         data_list = []
         for scient_name in bar:

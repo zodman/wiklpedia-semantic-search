@@ -3,6 +3,11 @@ import constants
 from datetime import date
 import textwrap
 import json
+import os
+
+
+def introduction():
+    click.secho('🤖 Im robot scrapper for wikipedia Scientificts')
 
 
 def to_text(list_kwargs):
@@ -42,4 +47,8 @@ def to_text(list_kwargs):
 
 
 def to_json(list_kwargs):
-    print(json.dumps(list_kwargs, default=str))
+    content = json.dumps(list_kwargs, default=str)
+    filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
+    with open(filename, 'w') as file:
+        file.write(content)
+    click.secho(f'{filename} file was generated')
