@@ -4,10 +4,21 @@
 #
 #    pip-compile --output-file=requirements-dev.txt requirements-dev.in
 #
+aiohttp==3.8.4
+    # via
+    #   langchain
+    #   openai
+aiosignal==1.3.1
+    # via aiohttp
 async-generator==1.10
     # via trio
+async-timeout==4.0.2
+    # via
+    #   aiohttp
+    #   langchain
 attrs==23.1.0
     # via
+    #   aiohttp
     #   jsonschema
     #   outcome
     #   trio
@@ -30,6 +41,7 @@ chardet==3.0.4
     # via rpaframework
 charset-normalizer==3.1.0
     # via
+    #   aiohttp
     #   pdfminer-six
     #   requests
 click==8.1.3
@@ -48,6 +60,8 @@ cryptography==40.0.2
     #   requests-ntlm
     #   rpaframework
     #   simple-salesforce
+dataclasses-json==0.5.7
+    # via langchain
 decorator==5.1.1
     # via
     #   jsonpath-ng
@@ -57,7 +71,9 @@ defusedxml==0.7.1
     #   exchangelib
     #   fpdf2
 dnspython==2.3.0
-    # via exchangelib
+    # via
+    #   exchangelib
+    #   pinecone-client
 docutils==0.20.1
     # via rpaframework
 et-xmlfile==1.1.0
@@ -69,16 +85,20 @@ exceptiongroup==1.1.1
     #   trio-websocket
 exchangelib==4.9.0
     # via rpaframework
-flake8==6.0.0
-    # via -r requirements-dev.in
 fonttools==4.39.4
     # via fpdf2
 fpdf2==2.7.4
     # via rpaframework-pdf
+frozenlist==1.3.3
+    # via
+    #   aiohttp
+    #   aiosignal
 furl==2.1.3
     # via robotframework-seleniumtestability
 graphviz==0.13.2
     # via rpaframework
+greenlet==2.0.2
+    # via sqlalchemy
 h11==0.14.0
     # via wsproto
 hijri-converter==2.3.1
@@ -93,6 +113,7 @@ idna==3.4
     # via
     #   requests
     #   trio
+    #   yarl
 importlib-metadata==4.13.0
     # via rpaframework
 iniconfig==2.0.0
@@ -109,19 +130,40 @@ jsonschema==4.17.3
     # via notifiers
 korean-lunar-calendar==0.3.1
     # via holidays
+langchain==0.0.173
+    # via -r requirements.in
+loguru==0.7.0
+    # via pinecone-client
 lxml==4.9.2
     # via
     #   exchangelib
     #   python-docx
     #   zeep
-mccabe==0.7.0
-    # via flake8
+marshmallow==3.19.0
+    # via
+    #   dataclasses-json
+    #   marshmallow-enum
+marshmallow-enum==1.5.1
+    # via dataclasses-json
 mss==6.1.0
     # via rpaframework
+multidict==6.0.4
+    # via
+    #   aiohttp
+    #   yarl
+mypy-extensions==1.0.0
+    # via typing-inspect
 netsuitesdk==1.24.0
     # via rpaframework
 notifiers==1.3.3
     # via rpaframework
+numexpr==2.8.4
+    # via langchain
+numpy==1.24.3
+    # via
+    #   langchain
+    #   numexpr
+    #   pinecone-client
 o365==2.0.26
     # via rpaframework
 oauthlib==3.2.2
@@ -129,6 +171,10 @@ oauthlib==3.2.2
     #   exchangelib
     #   requests-oauthlib
     #   rpaframework
+openai==0.27.6
+    # via -r requirements.in
+openapi-schema-pydantic==1.2.4
+    # via langchain
 openpyxl==3.1.2
     # via rpaframework
 orderedmultidict==1.0.1
@@ -137,6 +183,7 @@ outcome==1.2.0
     # via trio
 packaging==23.1
     # via
+    #   marshmallow
     #   pytest
     #   rpaframework-core
     #   webdriver-manager
@@ -149,18 +196,20 @@ pillow==9.5.0
     #   fpdf2
     #   rpaframework
     #   rpaframework-core
+pinecone-client==2.2.1
+    # via -r requirements.in
 platformdirs==3.5.1
     # via zeep
 pluggy==1.0.0
     # via pytest
 ply==3.11
     # via jsonpath-ng
-pycodestyle==2.10.0
-    # via flake8
 pycparser==2.21
     # via cffi
-pyflakes==3.0.1
-    # via flake8
+pydantic==1.10.7
+    # via
+    #   langchain
+    #   openapi-schema-pydantic
 pygments==2.15.1
     # via exchangelib
 pyjwt==2.7.0
@@ -204,6 +253,7 @@ python-dateutil==2.8.2
     #   hubspot-api-client
     #   o365
     #   pendulum
+    #   pinecone-client
     #   smartsheet-python-sdk
 python-docx==0.8.11
     # via htmldocx
@@ -222,12 +272,20 @@ pytz-deprecation-shim==0.1.0.post0
 pytzdata==2020.1
     # via pendulum
 pyyaml==6.0
-    # via rpaframework
+    # via
+    #   langchain
+    #   pinecone-client
+    #   rpaframework
+regex==2023.5.5
+    # via tiktoken
 requests[socks]==2.30.0
     # via
     #   exchangelib
+    #   langchain
     #   notifiers
     #   o365
+    #   openai
+    #   pinecone-client
     #   requests-file
     #   requests-ntlm
     #   requests-oauthlib
@@ -236,6 +294,7 @@ requests[socks]==2.30.0
     #   rpaframework
     #   simple-salesforce
     #   smartsheet-python-sdk
+    #   tiktoken
     #   tweepy
     #   webdriver-manager
     #   zeep
@@ -308,16 +367,25 @@ sortedcontainers==2.4.0
     # via trio
 soupsieve==2.4.1
     # via beautifulsoup4
+sqlalchemy==2.0.14
+    # via langchain
 stringcase==1.2.0
     # via o365
 tenacity==8.2.2
-    # via rpaframework
+    # via
+    #   langchain
+    #   rpaframework
+tiktoken==0.4.0
+    # via -r requirements.in
 tomli==2.0.1
     # via
     #   coverage
     #   pytest
 tqdm==4.65.0
-    # via webdriver-manager
+    # via
+    #   openai
+    #   pinecone-client
+    #   webdriver-manager
 trio==0.22.0
     # via
     #   selenium
@@ -326,6 +394,14 @@ trio-websocket==0.10.2
     # via selenium
 tweepy==3.10.0
     # via rpaframework
+typing-extensions==4.5.0
+    # via
+    #   pinecone-client
+    #   pydantic
+    #   sqlalchemy
+    #   typing-inspect
+typing-inspect==0.8.0
+    # via dataclasses-json
 tzdata==2023.3
     # via
     #   exchangelib
@@ -338,6 +414,7 @@ tzlocal==4.3
 urllib3[socks]==2.0.2
     # via
     #   hubspot-api-client
+    #   pinecone-client
     #   requests
     #   selenium
 validators==0.20.0
@@ -358,6 +435,8 @@ xlwt==1.3.0
     # via
     #   rpaframework
     #   xlutils
+yarl==1.9.2
+    # via aiohttp
 zeep==4.2.1
     # via
     #   netsuitesdk
