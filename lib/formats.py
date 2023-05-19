@@ -1,5 +1,5 @@
 import click
-import constants
+from lib import constants
 from datetime import date
 import textwrap
 import json

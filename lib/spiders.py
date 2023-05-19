@@ -1,7 +1,7 @@
 from RPA.Browser.Selenium import Selenium
 import re
 import logging
-import constants
+from lib import constants
 import SeleniumLibrary.errors
 
 log = logging.getLogger(__name__)

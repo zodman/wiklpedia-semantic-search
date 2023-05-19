@@ -1,8 +1,8 @@
 import pytest
-import crawlers
-import formats
-import constants
-import utils
+from lib import crawlers
+from lib import formats
+from lib import constants
+from lib import utils
 import main
 from datetime import date
 

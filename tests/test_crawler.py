@@ -1,4 +1,4 @@
-import crawlers
+from lib import crawlers
 
 
 def test_crawler_brainquotes():

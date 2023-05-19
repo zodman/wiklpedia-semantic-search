@@ -1,13 +1,13 @@
-import utils
+from lib import utils
 import click
-import crawlers
-import constants
-import formats
-import spiders
+from lib import crawlers
+from lib import constants
+from lib import formats
+from lib import spiders
 import os
 import json
-import populate as base_populate
-import bonus as base_bonus
+from lib import populate as base_populate
+from lib import bonus as base_bonus
 import logging
 
 log = logging.getLogger(__name__)

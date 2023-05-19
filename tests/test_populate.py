@@ -1,4 +1,4 @@
-import populate
+from lib import populate
 
 
 def test_populate_convert():

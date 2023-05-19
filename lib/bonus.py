@@ -3,7 +3,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 import pinecone
-import constants
+from lib import constants
 import click
 import textwrap
 import logging

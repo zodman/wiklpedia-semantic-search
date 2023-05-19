@@ -1,8 +1,8 @@
-from spiders import WikipediaScientistSpider, BrainQuotes
+from lib.spiders import WikipediaScientistSpider, BrainQuotes
 import textwrap
 import random
 import re
-import utils
+from lib import utils
 
 
 def crawler_wikipedia(name):

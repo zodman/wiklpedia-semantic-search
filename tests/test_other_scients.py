@@ -1,6 +1,6 @@
 import pytest
-import crawlers
-import formats
+from lib import crawlers
+from lib import formats
 
 
 @pytest.mark.parametrize('name', ['Euclid', 'Alan Turing'])

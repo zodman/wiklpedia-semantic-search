@@ -1,4 +1,4 @@
-import spiders
+import lib.spiders
 import pytest
 
 
