@@ -6,7 +6,6 @@ import SeleniumLibrary.errors
 
 log = logging.getLogger(__name__)
 
-
 class SpiderError(Exception):
     pass
 

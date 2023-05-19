@@ -18,6 +18,8 @@ def configure_loggers():  # pragma: no cover
             continue
         logging.getLogger(log_name).setLevel(logging.CRITICAL)
 
+    logging.getLogger('lib.spiders').setLevel(logging.DEBUG)
+
 
 def get_date_from_string(date_str):
     if date_str == '':
