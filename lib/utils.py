@@ -14,8 +14,7 @@ def configure_loggers():  # pragma: no cover
     ]
 
     for log_name in list_loggers:
-        print((log_name, 'spiders' in log_name))
-        if 'lib.spiders' in log_name:
+        if 'spiders' in log_name:
             continue
         logging.getLogger(log_name).setLevel(logging.CRITICAL)
 

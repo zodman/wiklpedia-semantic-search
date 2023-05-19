@@ -7,7 +7,7 @@ def test_spider_open(mocker):
     drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 0
 
-    s = lib.spiders.Spider('url')
+    s = spiders.Spider('url')
     with pytest.raises(spiders.SpiderError):
         s.open()
 
@@ -40,9 +40,9 @@ def test_spider_parse_with_exception(mocker):
     drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
     mocker.patch('lib.spiders.Spider.parse',
-                 side_effect=lib.spiders.SpiderError('mock'))
+                 side_effect=spiders.SpiderError('mock'))
 
-    s = lib.spiders.Spider('url')
+    s = spiders.Spider('url')
     s.open()
     with pytest.raises(spiders.SpiderError):
         s.parse_page()
