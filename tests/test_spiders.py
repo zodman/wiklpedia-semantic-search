@@ -1,20 +1,20 @@
-import lib.spiders
+from lib import spiders
 import pytest
 
 
 def test_spider_open(mocker):
 
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 0
 
-    s = spiders.Spider('url')
+    s = lib.spiders.Spider('url')
     with pytest.raises(spiders.SpiderError):
         s.open()
 
 
 def test_spider_parse(mocker):
 
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
 
     s = spiders.Spider('url')
@@ -25,9 +25,9 @@ def test_spider_parse(mocker):
 
 def test_spider_parse_page(mocker):
 
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
-    mocker.patch('spiders.Spider.parse')
+    mocker.patch('lib.spiders.Spider.parse')
 
     s = spiders.Spider('url')
     s.open()
@@ -37,12 +37,12 @@ def test_spider_parse_page(mocker):
 
 def test_spider_parse_with_exception(mocker):
 
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
-    mocker.patch('spiders.Spider.parse',
-                 side_effect=spiders.SpiderError('mock'))
+    mocker.patch('lib.spiders.Spider.parse',
+                 side_effect=lib.spiders.SpiderError('mock'))
 
-    s = spiders.Spider('url')
+    s = lib.spiders.Spider('url')
     s.open()
     with pytest.raises(spiders.SpiderError):
         s.parse_page()
@@ -50,28 +50,28 @@ def test_spider_parse_with_exception(mocker):
 
 
 def test_spider_run(mocker):
-    mocker.patch('spiders.Spider.drv')
-    mocker.patch('spiders.Spider.parse')
+    mocker.patch('lib.spiders.Spider.drv')
+    mocker.patch('lib.spiders.Spider.parse')
     spiders.Spider.run('test')
 
 
 def test_spider_brainquotes(mocker):
-    mocker.patch('spiders.Spider.drv')
-    mocker.patch('spiders.Spider.drv.find_elements', side_effect=[[]])
+    mocker.patch('lib.spiders.Spider.drv')
+    mocker.patch('lib.spiders.Spider.drv.find_elements', side_effect=[[]])
     spider = spiders.BrainQuotes('')
     spider.open()
     spider.parse()
 
 
 def test_spider_wikipedia_parse(mocker):
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
 
-    mocker.patch('spiders.Spider.drv.find_element',
+    mocker.patch('lib.spiders.Spider.drv.find_element',
                  side_effect=[mocker.MagicMock()])
-    mocker.patch('spiders.WikipediaScientistSpider._get_content',
+    mocker.patch('lib.spiders.WikipediaScientistSpider._get_content',
                  return_value=['foobar'])
-    mocker.patch('spiders.WikipediaScientistSpider._get_biography_table',
+    mocker.patch('lib.spiders.WikipediaScientistSpider._get_biography_table',
                  return_value='foobar2')
     spider = spiders.WikipediaScientistSpider('')
     r = spider.parse()
@@ -81,7 +81,7 @@ def test_spider_wikipedia_parse(mocker):
 
 
 def test_spider_wikipedia_summary(mocker):
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
 
     element = mocker.MagicMock()
@@ -90,7 +90,7 @@ def test_spider_wikipedia_summary(mocker):
     element.text.return_value = 'foobar'
     mocker.patch('re.sub', side_effect=['foobar', ''])
 
-    mocker.patch('spiders.Spider.drv.find_elements',
+    mocker.patch('lib.spiders.Spider.drv.find_elements',
                  side_effect=[
                      [element, element2],
                  ])
@@ -100,7 +100,7 @@ def test_spider_wikipedia_summary(mocker):
 
 
 def test_spider_wikipedia_biography(mocker):
-    drv_mock = mocker.patch('spiders.Spider.drv')
+    drv_mock = mocker.patch('lib.spiders.Spider.drv')
     drv_mock.open_available_browser.return_value = 1
     mocker.patch('re.sub', side_effect=['foobar', ''])
 
@@ -108,9 +108,9 @@ def test_spider_wikipedia_biography(mocker):
     element.text.return_value = 'foobar'
     element2 = mocker.MagicMock()
     element.text.return_value = 'foobar'
-    mocker.patch('spiders.Spider.drv.find_element', side_effect=element)
+    mocker.patch('lib.spiders.Spider.drv.find_element', side_effect=element)
 
-    mocker.patch('spiders.Spider.drv.find_elements',
+    mocker.patch('lib.spiders.Spider.drv.find_elements',
                  side_effect=[
                      [element, element2],
                      [element, element2],
