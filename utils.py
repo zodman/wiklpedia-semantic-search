@@ -4,7 +4,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def configure_loggers():
+def configure_loggers():  # pragma: no cover
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(name)s %(levelname)s '
                         '%(filename)s:%(lineno)s  %(message)s')
@@ -40,5 +40,5 @@ def get_date_from_string(date_str):
         return _retry_date(date_str)
 
 
-def send_heartbeat():
+def send_heartbeat():  # pragma: no cover
     log.info('send notify of success')

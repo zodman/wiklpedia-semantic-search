@@ -11,6 +11,7 @@ HEADLESS = os.environ.get("HEADLESS")
 DATE_FORMAT = "%-d %B %Y"
 
 BASE_DIR = os.path.dirname(__file__)
+JSON_FILENAME = os.path.join(BASE_DIR, 'scientist.json')
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')

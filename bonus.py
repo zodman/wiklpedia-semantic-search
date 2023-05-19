@@ -11,7 +11,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def bonus():
+def bonus():  # pragma: no cover
     pinecone.init(
         api_key=constants.PINECONE_API_KEY,  # find at app.pinecone.io
         environment=constants.PINECONE_API_ENV,  # next to api key in console

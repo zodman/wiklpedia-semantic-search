@@ -5,7 +5,7 @@ import formats
 
 @pytest.mark.parametrize('name', ['Euclid', 'Alan Turing'])
 def test_others(name):
-    data = crawlers.Scientistic.crawl(name)
+    data = crawlers.Scientist.crawl(name)
     assert 'title' in data and data['title'] != ''
     assert 'summary' in data and data['summary'] != ''
     assert 'born_date' in data

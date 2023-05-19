@@ -25,7 +25,7 @@ def crawler(name):
     return data
 
 
-class Scientistic:
+class Scientist:
 
     @classmethod
     def crawl(cls, name):

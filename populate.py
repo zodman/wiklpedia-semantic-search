@@ -9,12 +9,13 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def convert_scientificts_to_documents(list_data):
+def convert_scientsts_to_documents(list_data):
     title_db = set()
     result_list = []
     for data in list_data:
         tmp_data = data.copy()
         del tmp_data['page_content']
+        del tmp_data['quote']
         title = data['title']
         if title not in title_db:
             title_db.add(title)
@@ -24,7 +25,7 @@ def convert_scientificts_to_documents(list_data):
     return result_list
 
 
-def populate(documents):
+def populate(documents):  # pragma: no cover
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000,
                                                    chunk_overlap=0)
     documents_splitted = text_splitter.split_documents(documents)

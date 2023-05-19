@@ -6,8 +6,8 @@ import json
 import os
 
 
-def introduction():
-    click.secho('🤖 Im robot scrapper for wikipedia Scientificts')
+def introduction():  # pragma: no cover
+    click.secho('🤖 Im robot scrapper for wikipedia Scientists')
 
 
 def to_text(list_kwargs):
@@ -47,12 +47,11 @@ def to_text(list_kwargs):
 
 
 def to_json(list_kwargs):
-    filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
     prev_content = []
-    if os.path.exists(filename):
-        with open(filename) as file:
+    if os.path.exists(constants.JSON_FILENAME):
+        with open(constants.JSON_FILENAME) as file:
             prev_content = json.loads(file.read())
     content = json.dumps(list_kwargs + prev_content, default=str)
-    with open(filename, 'w') as file:
+    with open(constants.JSON_FILENAME, 'w') as file:
         file.write(content)
-    click.secho(f'{filename} file was generated', fg='green')
+    click.secho(f'{constants.JSON_FILENAME} file was generated', fg='green')

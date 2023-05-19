@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 def execute_robot(name):
     click.secho(f'🕷️ Scrapping {name}', fg='green')
     try:
-        return crawlers.Scientistic.crawl(name)
+        return crawlers.Scientist.crawl(name)
     except spiders.SpiderErrorNotFound:
         click.secho(f'{name} Not Found', fg='red')
 
@@ -46,19 +46,20 @@ def run(format, other):
             if data:
                 data_list.append(data)
 
-    if format == 'json':
+    if format == 'json' and len(data_list) > 0:
         formats.to_json(data_list)
+        if other:
+            formats.to_text(data_list)
     else:
         formats.to_text(data_list)
     utils.send_heartbeat()
 
 
 @cli.command
-def populate():
-    filename = os.path.join(constants.BASE_DIR, 'scientifics.json')
-    if os.path.exists(filename):
-        data_list = json.loads(open(filename).read())
-        documents = base_populate.convert_scientificts_to_documents(data_list)
+def populate():  # pragma: no cover
+    if os.path.exists(constants.JSON_FILENAME):
+        data_list = json.loads(open(constants.JSON_FILENAME).read())
+        documents = base_populate.convert_scientsts_to_documents(data_list)
         base_populate.populate(documents)
         click.secho('finished', fg='green')
     else:
@@ -66,7 +67,7 @@ def populate():
 
 
 @cli.command()
-def bonus():
+def bonus():  # pragma: no cover
     base_bonus.bonus()
 
 

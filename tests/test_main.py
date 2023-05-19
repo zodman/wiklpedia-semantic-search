@@ -3,6 +3,7 @@ import crawlers
 import formats
 import constants
 import utils
+import main
 from datetime import date
 
 
@@ -37,7 +38,7 @@ def test_crawler(name):
 
 @pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_main_crawl(name):
-    data = crawlers.Scientistic.crawl(name)
+    data = main.execute_robot(name)
     assert 'title' in data and data['title'] != ''
     assert 'summary' in data and data['summary'] != ''
     assert 'born_date' in data
