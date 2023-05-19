@@ -21,7 +21,7 @@ def to_text(list_kwargs):
         if hasattr(born_date, "year") and hasattr(dead_date, 'year'):
             years = f'({born_date.year} - {dead_date.year})'
 
-        click.secho(f'➡️  {title} {years}', fg='green', bold=True)
+        click.secho(f'\n\n➡️  {title} {years}', fg='green', bold=True)
         click.secho(f'📖 {summary}', fg='white')
 
         if born_date:

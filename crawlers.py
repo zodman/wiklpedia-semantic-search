@@ -17,7 +17,7 @@ def crawler_quotes(name):
     return BrainQuotes.run(url)
 
 
-def crawler(name):
+def run_crawlers(name):
     data = {}
     for crawler_func in (crawler_wikipedia, crawler_quotes):
         data_tmp = crawler_func(name)
@@ -29,7 +29,11 @@ class Scientist:
 
     @classmethod
     def crawl(cls, name):
-        data = crawler(name)
+        data = run_crawlers(name)
+        return cls.transform_crawled_data(data)
+
+    @classmethod
+    def transform_crawled_data(cls, data):
         title = data['heading']
         summary = '\n'.join(textwrap.wrap(data['summary']))
         page_content = '\n'.join(data['page_content'])

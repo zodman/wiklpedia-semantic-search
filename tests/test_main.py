@@ -19,7 +19,7 @@ def test_date_object():
     "William Kirby",
 ])
 def test_crawler_others(name):
-    data = crawlers.crawler(name)
+    data = crawlers.run_crawlers(name)
     assert 'heading' in data and data['heading'] != ''
     assert 'summary' in data and data['summary'] != ''
     assert 'biography' in data and data['biography'] == {}
@@ -27,7 +27,7 @@ def test_crawler_others(name):
 
 @pytest.mark.parametrize('name', constants.SCIENTISTS)
 def test_crawler(name):
-    data = crawlers.crawler(name)
+    data = crawlers.run_crawlers(name)
     assert 'heading' in data and data['heading'] != ''
     assert 'summary' in data and data['summary'] != ''
     assert 'biography' in data and len(data['biography'].items()) > 0
