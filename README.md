@@ -29,4 +29,5 @@ What other nifty features can you add to your robot? This is not required but is
 opportunity for you to have fun with your code and show your creativity.
 
 
-<iframe src='https://drive.google.com/file/d/1-HMJgvaPp97rYuoqeIL9fF-jo_kifuvp/view'></iframe>
+Video demo: 
+https://drive.google.com/file/d/1-HMJgvaPp97rYuoqeIL9fF-jo_kifuvp/view
