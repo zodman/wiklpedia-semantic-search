@@ -53,12 +53,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: download stripe
-        env:
-          VERSION: "1.16.0"
-        run: |
+      - run: |
           curl -sLO https://github.com/stripe/stripe-cli/releases/download/v$VERSION/stripe_$VERSION_linux_amd64.deb
           dpkg -i stripe_$VERSION_linux_amd64.deb
+        env:
+          VERSION: "1.16.0"
       - run: stripe version
 
       - name: Install dependencies
