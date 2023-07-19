@@ -54,8 +54,8 @@ jobs:
         with:
           python-version: "3.10"
       - run: |
-          curl -sLO https://github.com/stripe/stripe-cli/releases/download/v${{ VERSION }}/stripe_${{ VERSION }}_linux_amd64.deb
-          dpkg -i stripe_${{ VERSION }}_linux_amd64.deb
+          curl -sLO "https://github.com/stripe/stripe-cli/releases/download/v$VERSION/stripe_$VERSION_linux_amd64.deb"
+          dpkg -i "stripe_$VERSION_linux_amd64.deb"
         env:
           VERSION: "1.16.0"
       - run: stripe version
